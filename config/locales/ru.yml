@@ -21,6 +21,7 @@ ru:
         name: Название
         start_sum: Стартовая цена
         min_step: Минимальный шаг
+        ends_at: Время завершения
       user:
         password: Пароль
         password_confirmation: Подтвердите пароль

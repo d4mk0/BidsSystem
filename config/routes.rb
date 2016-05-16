@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :items
+  resources :items do
+    post :place_stake, on: :member
+  end
   devise_for :users
-  
+
   root to: 'items#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

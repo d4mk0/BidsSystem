@@ -13,16 +13,39 @@
       <div class="panel panel-default">
         <div class="panel-heading"><%= item.name %></div>
         <div class="panel-body">
-          Создатель: <b><%= item.user.email %></b>
-          <br>
-          Стартовая цена: <b><%= item.start_sum %></b>
-          <br>
-          Минимальный шаг: <b><%= item.min_step %></b>
-          <br>
-          Текущая цена: <b><%= item.current_sum %></b>
-          <%= simple_form_for :bid, html: { class: 'form-inline' } do |f| %>
-            <%= f.input :stake, input_html: { value: item.min_stake }, label: false, required: false %>
-            <%= f.button :submit, "Поставить" %>
+          <% if item.active? %>
+            Создатель: <b><%= item.user.email %></b>
+            <br>
+            Стартовая цена: <b><%= item.start_sum %></b>
+            <br>
+            Минимальный шаг: <b><%= item.min_step %></b>
+            <br>
+            <% if item.last_stake.present? %>
+              Последняя ставка <b><%= item.last_stake.sum %></b> от <b><%= item.last_stake.user.email %></b>
+            <% else %>
+              Текущая цена: <b><%= item.current_sum %></b>
+            <% end %>
+            <br>
+            Время до окончания: <b><%= item.ends_through_in_seconds %></b>
+            <br>
+            Минимальная ставка: <b><%= item.min_stake %></b>
+            <%= simple_form_for :stake, url: place_stake_item_path(item), html: { class: 'form-inline' } do |f| %>
+              <%= f.input :sum, input_html: { value: item.min_stake }, label: false, required: false %>
+              <%= f.button :submit, "Поставить" %>
+            <% end %>
+          <% else %>
+            Аукцион на товар завершен
+            <br>
+            <% if item.last_stake.present? %>
+              Товар был продан <b><%= item.last_stake.user.email %></b> за <b><%= item.last_stake.sum %></b>
+            <% else %>
+              Товар не был продан
+            <% end %>
+            <br>
+            Создатель: <b><%= item.user.email %></b>
+            <br>
+            Стартовая цена: <b><%= item.start_sum %></b>
+            <br>
           <% end %>
         </div>
       </div>

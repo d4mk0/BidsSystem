@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: [:show, :edit, :update, :destroy]
+  before_action :set_item, only: [:show, :edit, :update, :destroy, :place_stake]
 
   # GET /items
   # GET /items.json
@@ -15,6 +15,7 @@ class ItemsController < ApplicationController
   # GET /items/new
   def new
     @item = Item.new
+    @item.ends_at = Time.now + 10.minutes
   end
 
   # GET /items/1/edit
@@ -29,7 +30,7 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to @item, notice: 'Товар успешно создан' }
+        format.html { redirect_to items_path, notice: 'Товар успешно создан' }
         format.json { render :show, status: :created, location: @item }
       else
         format.html { render :new }
@@ -62,6 +63,18 @@ class ItemsController < ApplicationController
     end
   end
 
+  def place_stake
+    stake = @item.create_stake(params[:stake][:sum].to_i, current_user)
+
+    if stake.class == Stake
+      flash[:notice] = "Ставка в размере #{stake.sum} на товар #{@item.name} успешно принята"
+    else
+      flash[:error] = stake
+    end
+
+    redirect_to items_url
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
@@ -70,6 +83,6 @@ class ItemsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:start_sum, :name, :min_step)
+      params.require(:item).permit(:start_sum, :name, :min_step, :ends_at)
     end
 end
