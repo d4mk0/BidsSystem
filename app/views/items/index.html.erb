@@ -9,56 +9,65 @@
 </div>
 <div class="row">
   <% @items.each do |item| %>
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading"><%= item.name %></div>
         <div class="panel-body">
-          <% if item.active? %>
-            Создатель: <b><%= item.user.email %></b>
-            <br>
-            Стартовая цена: <b><%= item.start_sum %></b>
-            <br>
-            Минимальный шаг: <b><%= item.min_step %></b>
-            <br>
-            <% if item.last_stake.present? %>
-              Последняя ставка <b><%= item.last_stake.sum %></b> от <b><%= item.last_stake.user.email %></b>
+          <div class="col-md-6">
+            <% if item.active? %>
+              Создатель: <b><%= item.user.email %></b>
+              <br>
+              Стартовая цена: <b><%= item.start_sum %></b>
+              <br>
+              Минимальный шаг: <b><%= item.min_step %></b>
+              <br>
+              <% if item.last_stake.present? %>
+                Последняя ставка <b><%= item.last_stake.sum %></b> от <b><%= item.last_stake.user.email %></b>
+              <% else %>
+                Текущая цена: <b><%= item.current_sum %></b>
+              <% end %>
+              <br>
+              Осталось до окончания: <b><%= item.ends_through_in_seconds %></b> секунд
+              <br>
+              Время начала: <b><%=l item.created_at, format: :short %></b>
+              <br>
+              Время окончания: <b><%=l item.ends_at, format: :short %></b>
+              <br>
+              Минимальная ставка: <b><%= item.min_stake %></b>
+              <%= simple_form_for :stake, url: place_stake_item_path(item), html: { class: 'form-inline' } do |f| %>
+                <%= f.input :sum, input_html: { value: item.min_stake }, label: false, required: false %>
+                <%= f.button :submit, "Поставить" %>
+              <% end %>
             <% else %>
-              Текущая цена: <b><%= item.current_sum %></b>
+              <% if item.last_stake.user == current_user %>
+                <b>Вы победили в этом аукционе</b>
+              <% else %>
+                Аукцион на товар завершен
+              <% end %>
+              <br>
+              <% if item.last_stake.present? %>
+                Товар был продан <b><%= item.last_stake.user.email %></b> за <b><%= item.last_stake.sum %></b>
+              <% else %>
+                Товар не был продан
+              <% end %>
+              <br>
+              Создатель: <b><%= item.user.email %></b>
+              <br>
+              Стартовая цена: <b><%= item.start_sum %></b>
+              <br>
+              Время начала: <b><%=l item.created_at, format: :short %></b>
+              <br>
+              Время окончания: <b><%=l item.ends_at, format: :short %></b>
+              <br>
             <% end %>
-            <br>
-            Осталось до окончания: <b><%= item.ends_through_in_seconds %></b> секунд
-            <br>
-            Время начала: <b><%=l item.created_at, format: :short %></b>
-            <br>
-            Время окончания: <b><%=l item.ends_at, format: :short %></b>
-            <br>
-            Минимальная ставка: <b><%= item.min_stake %></b>
-            <%= simple_form_for :stake, url: place_stake_item_path(item), html: { class: 'form-inline' } do |f| %>
-              <%= f.input :sum, input_html: { value: item.min_stake }, label: false, required: false %>
-              <%= f.button :submit, "Поставить" %>
-            <% end %>
-          <% else %>
-            <% if item.last_stake.user == current_user %>
-              <b>Вы победили в этом аукционе</b>
+          </div>
+          <div class="col-md-6">
+            <% if item.image.present? %>
+              <%= image_tag item.image.url, style: 'max-width: 100%' %>
             <% else %>
-              Аукцион на товар завершен
+              Изображения нет
             <% end %>
-            <br>
-            <% if item.last_stake.present? %>
-              Товар был продан <b><%= item.last_stake.user.email %></b> за <b><%= item.last_stake.sum %></b>
-            <% else %>
-              Товар не был продан
-            <% end %>
-            <br>
-            Создатель: <b><%= item.user.email %></b>
-            <br>
-            Стартовая цена: <b><%= item.start_sum %></b>
-            <br>
-            Время начала: <b><%=l item.created_at, format: :short %></b>
-            <br>
-            Время окончания: <b><%=l item.ends_at, format: :short %></b>
-            <br>
-          <% end %>
+          </div>
         </div>
       </div>
     </div>

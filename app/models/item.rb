@@ -6,6 +6,8 @@ class Item < ActiveRecord::Base
   validates_numericality_of :start_sum, :min_step, greater_than: 0
   validate :check_ends_at
 
+  mount_uploader :image, ItemImageUploader
+
   def current_sum
     if last_stake.present?
       last_stake.sum

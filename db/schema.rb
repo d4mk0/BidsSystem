@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516125017) do
+ActiveRecord::Schema.define(version: 20160516131704) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -36,6 +36,7 @@ ActiveRecord::Schema.define(version: 20160516125017) do
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
     t.datetime "ends_at",    default: '2016-05-16 12:51:00', null: false
+    t.string   "image"
   end
 
   add_index "items", ["user_id"], name: "index_items_on_user_id"
