@@ -1,0 +1,7 @@
+<%= simple_form_for @item, :html => { :class => 'form-horizontal' } do |f| %>
+  <%= f.input :name %>
+  <%= f.input :start_sum %>
+  <%= f.input :min_step %>
+
+  <%= f.button :submit, 'Сохранить', :class => 'btn-primary' %>
+<% end %>

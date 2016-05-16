@@ -1,0 +1,30 @@
+ru:
+  hello: "Привет мир"
+  Monday: "Понедельник"
+  Tuesday: "Вторник"
+  Wednesday: "Среда"
+  Thursday: "Четверг"
+  Friday: "Пятница"
+  Saturday: "Суббота"
+  Sunday: "Воскресенье"
+  Mon: "Пон"
+  Tues: "Втр"
+  Wed: "Срд"
+  Thur: "Чтв"
+  Fri: "Птн"
+  Sat: "Сбт"
+  Sun: "Вск"
+
+  activerecord:
+    attributes:
+      item:
+        name: Название
+        start_sum: Стартовая цена
+        min_step: Минимальный шаг
+      user:
+        password: Пароль
+        password_confirmation: Подтвердите пароль
+        remember_me: Запомнить меня
+  errors:
+    messages:
+      not_saved: Не сохранено из за ошибок

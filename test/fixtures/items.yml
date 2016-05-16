@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  start_sum: 1
+  user_id: 1
+  name: MyString
+
+two:
+  start_sum: 1
+  user_id: 1
+  name: MyString
