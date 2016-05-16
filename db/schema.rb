@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160516115044) do
+ActiveRecord::Schema.define(version: 20160516121922) do
 
   create_table "items", force: :cascade do |t|
     t.integer  "start_sum",                                  null: false
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20160516115044) do
     t.integer  "min_step",                                   null: false
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
-    t.datetime "ends_at",    default: '2016-05-16 11:59:59', null: false
+    t.datetime "ends_at",    default: '2016-05-16 12:32:37', null: false
   end
 
   add_index "items", ["user_id"], name: "index_items_on_user_id"
@@ -47,6 +47,8 @@ ActiveRecord::Schema.define(version: 20160516115044) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.integer  "current_balance",     default: 0,  null: false
+    t.integer  "frozen_balance",      default: 0,  null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -49,13 +49,13 @@
         <div class="navbar-collapse collapse navbar-responsive-collapse">
           <ul class="nav navbar-nav">
             <li><%= link_to "Аукцион", items_path  %></li>
-            <li>
-              <% if current_user.present? %>
-                <%= link_to "Выход", destroy_user_session_path, method: :delete %>
-              <% else %>
-                <%= link_to "Вход", new_user_session_path %>
-              <% end %>
-            </li>
+            <% if current_user.present? %>
+              <li><%= link_to "Текущий баланс #{current_user.current_balance}", '#' %></li>
+              <li><%= link_to "Замороженный баланс #{current_user.frozen_balance}", '#' %></li>
+              <li><%= link_to "Выход", destroy_user_session_path, method: :delete %></li>
+            <% else %>
+              <li><%= link_to "Вход", new_user_session_path %></li>
+            <% end %>
           </ul>
         </div>
       </div>

@@ -19,10 +19,21 @@ class Item < ActiveRecord::Base
   end
 
   def create_stake(sum, user)
-    if sum >= min_stake
-      stakes.create(sum: sum, user: user)
-    else
+    if sum < min_stake
       "Сумма ставки должна быть больше минимальной ставки"
+    elsif user.current_balance < sum
+      "Вашего баланса недостаточно для ставки. Баланс #{user.current_balance}. Ставка #{sum}"
+    elsif last_stake.present? && last_stake.user == user
+      "Вы не можете перебить свою ставку"
+    else
+      prev_stake = last_stake
+      stake = stakes.create(sum: sum, user: user)
+      user.update(current_balance: (user.current_balance - stake.sum), frozen_balance: (user.frozen_balance + stake.sum))
+      if prev_stake.present?
+        prev_stake.user.update(current_balance: (prev_stake.user.current_balance + prev_stake.sum), frozen_balance: (prev_stake.user.frozen_balance - prev_stake.sum))
+      end
+
+      stake
     end
   end
 
