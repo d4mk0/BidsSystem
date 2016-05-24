@@ -8,6 +8,17 @@ class Item < ActiveRecord::Base
 
   mount_uploader :image, ItemImageUploader
 
+  def self.by_current_sum
+    hash = {}
+    items = Item.all
+    items.each do |item|
+      hash[item.id] = item.current_sum
+    end
+    ids = Hash[hash.sort_by{|k, v| v}.reverse].keys
+    sorted_records = ids.collect {|id| items.detect {|x| x.id == id}}
+
+  end
+
   def current_sum
     if last_stake.present?
       last_stake.sum

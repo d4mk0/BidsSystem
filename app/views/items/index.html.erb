@@ -4,12 +4,23 @@
   <%= link_to "Добавить новый товар",
               new_item_path,
               :class => 'btn btn-primary' %>
+  <%= link_to "Сортировать по цене",
+              items_path(sort: :by_current_sum),
+              :class => 'btn btn-success' %>
+  <%= link_to "Сортировать по времени создания",
+              items_path,
+              :class => 'btn btn-success' %>
+  <%= link_to "График пользователей по количеству ставок",
+              chart_items_path,
+              :class => 'btn btn-default' %>
+
+
 </div>
 <div class="">
 </div>
 <div class="row">
   <% @items.each do |item| %>
-    <div class="col-md-6">
+    <div class="col-md-12">
       <div class="panel panel-default">
         <div class="panel-heading"><%= item.name %></div>
         <div class="panel-body">

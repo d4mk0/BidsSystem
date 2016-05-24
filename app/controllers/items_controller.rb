@@ -4,7 +4,11 @@ class ItemsController < ApplicationController
   # GET /items
   # GET /items.json
   def index
-    @items = Item.all
+    @items = if params[:sort] == 'by_current_sum'
+      Item.by_current_sum
+    else
+      Item.all
+    end
   end
 
   # GET /items/1
