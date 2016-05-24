@@ -71,6 +71,12 @@
               Время окончания: <b><%=l item.ends_at, format: :short %></b>
               <br>
             <% end %>
+            <% if current_user.is_admin? || item.user == current_user %>
+              <%= link_to 'Редактировать', edit_item_path(item), class: 'btn btn-warning' %>
+            <% end %>
+            <% if current_user.is_admin? || item.user == current_user %>
+              <%= link_to 'Удалить', item_path(item), class: 'btn btn-danger', method: :delete, data: { confirm: 'Вы уверены?' } %>
+            <% end %>
           </div>
           <div class="col-md-6">
             <% if item.image.present? %>

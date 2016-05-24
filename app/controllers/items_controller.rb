@@ -48,7 +48,7 @@ class ItemsController < ApplicationController
   def update
     respond_to do |format|
       if @item.update(item_params)
-        format.html { redirect_to @item, notice: 'Товар успешно изменен' }
+        format.html { redirect_to items_path, notice: 'Товар успешно изменен' }
         format.json { render :show, status: :ok, location: @item }
       else
         format.html { render :edit }
