@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        Данные платежа
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <form role="form">
+                    <div class="form-group">
+                        <label for="cardNumber">
+                            Номер карты</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" id="cardNumber" placeholder="Номер карты"
+                                required autofocus />
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-7 col-md-7">
+                            <div class="form-group">
+                                <label for="expityMonth">
+                                    Срок действия</label>
+                                <div class="col-xs-6 col-lg-6 pl-ziro">
+                                    <input type="text" class="form-control" id="expityMonth" placeholder="MM" required />
+                                </div>
+                                <div class="col-xs-6 col-lg-6 pl-ziro">
+                                    <input type="text" class="form-control" id="expityYear" placeholder="YY" required /></div>
+                            </div>
+                        </div>
+                        <div class="col-xs-5 col-md-5 pull-right">
+                            <div class="form-group">
+                                <label for="cvCode">
+                                    CV код</label>
+                                <input type="password" class="form-control" id="cvCode" placeholder="CV" required />
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="#"><span class="badge pull-right">1000</span> К оплате</a>
+                </li>
+            </ul>
+            <br/>
+            <a href="#" class="btn btn-success btn-lg btn-block" role="button">Оплатить</a>
+        </div>
+    </div>
+</div>

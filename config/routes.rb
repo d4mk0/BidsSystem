@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     post :place_stake, on: :member
     get :chart, on: :collection
     get :map, on: :collection
+    get :payment, on: :collection
   end
   devise_for :users
 

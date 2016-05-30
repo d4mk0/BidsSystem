@@ -51,8 +51,8 @@
           <ul class="nav navbar-nav">
             <li><%= link_to "Аукцион", items_path  %></li>
             <% if current_user.present? %>
-              <li><%= link_to "Текущий баланс #{current_user.current_balance}", '#' %></li>
-              <li><%= link_to "Замороженный баланс #{current_user.frozen_balance}", '#' %></li>
+              <li><%= link_to "Текущий баланс #{current_user.current_balance}", payment_items_path %></li>
+              <li><%= link_to "Замороженный баланс #{current_user.frozen_balance}", payment_items_path %></li>
               <li><%= link_to "Карта", map_items_path %></li>
               <li><%= link_to "Выход", destroy_user_session_path, method: :delete %></li>
             <% else %>
