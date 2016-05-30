@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :items do
     post :place_stake, on: :member
     get :chart, on: :collection
+    get :map, on: :collection
   end
   devise_for :users
 
