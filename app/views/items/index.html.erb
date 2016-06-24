@@ -50,7 +50,7 @@
                 <%= f.button :submit, "Поставить" %>
               <% end %>
             <% else %>
-              <% if item.last_stake.user == current_user %>
+              <% if item.last_stake.present? && item.last_stake.user == current_user %>
                 <b>Вы победили в этом аукционе</b>
               <% else %>
                 Аукцион на товар завершен
